@@ -1,4 +1,4 @@
-package entities;
+package com.adamfgcross.springnote.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
