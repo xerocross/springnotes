@@ -52,7 +52,8 @@ public class SecurityConfig{
 	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Disable session management	
 			.and()
 	        .authorizeHttpRequests((requests) -> requests
-				.anyRequest().permitAll()
+	        	.requestMatchers("/auth/login").permitAll()
+				.anyRequest().authenticated()
 			)
 			.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
 			.headers().frameOptions().sameOrigin(); 
