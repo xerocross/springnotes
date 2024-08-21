@@ -13,7 +13,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-	@Value("${secret-key}")
+	@Value("${spring.secret-key}")
     private String SECRET_KEY;
 
     public String extractUsername(String token) {
