@@ -48,15 +48,14 @@ public class SecurityConfig{
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-			.csrf().disable()
-	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Disable session management	
-			.and()
-	        .authorizeHttpRequests((requests) -> requests
+			.csrf(csrf -> csrf.disable())
+			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Disable session management	
+	        .authorizeHttpRequests((authorize) -> authorize
 	        	.requestMatchers("/auth/login").permitAll()
 				.anyRequest().authenticated()
 			)
 			.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-			.headers().frameOptions().sameOrigin(); 
+			.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin())); 
 
 		return http.build();
 	}
