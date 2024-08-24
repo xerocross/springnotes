@@ -1,12 +1,17 @@
 package com.adamfgcross.springnote.auth;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
 
@@ -30,24 +35,23 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+    	JwtParser parser = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build();
+    	try {
+    		Jws<Claims> jws = parser.parseClaimsJws(token);
+    		return jws.getBody();
+    	} catch (SignatureException e) {
+    		throw new AuthenticationFailureException(e);
+    	}
     }
 
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-
-    public String generateToken(String username) {
-        return createToken(username);
-    }
-
-    private String createToken(String subject) {
-        return Jwts.builder()
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours expiration
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                .compact();
+    
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes()); // Convert your secret key to the appropriate format
     }
 
     protected String generateToken(Authentication authentication) {
@@ -57,7 +61,7 @@ public class JwtUtil {
                 .claim("roles", authentication.getAuthorities()) // Include roles or other claims
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 day expiration
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
     
