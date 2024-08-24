@@ -1,10 +1,14 @@
 package com.adamfgcross.springnote.auth;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
+
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -41,9 +45,17 @@ public class JwtUtil {
     	try {
     		Jws<Claims> jws = parser.parseClaimsJws(token);
     		return jws.getBody();
-    	} catch (SignatureException e) {
-    		throw new AuthenticationFailureException(e);
-    	}
+    	}  catch (ExpiredJwtException e) {
+            throw new AuthenticationFailureException("JWT token is expired", e);
+        } catch (UnsupportedJwtException e) {
+            throw new AuthenticationFailureException("JWT token is unsupported", e);
+        } catch (MalformedJwtException e) {
+            throw new AuthenticationFailureException("JWT token is malformed", e);
+        } catch (SignatureException e) {
+            throw new AuthenticationFailureException("JWT signature validation failed", e);
+        } catch (IllegalArgumentException e) {
+            throw new AuthenticationFailureException("JWT token is invalid", e);
+        }
     }
 
     private Boolean isTokenExpired(String token) {
