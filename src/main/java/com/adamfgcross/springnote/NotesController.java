@@ -9,7 +9,7 @@ import com.adamfgcross.springnote.entities.Note;
 
 @RestController
 @RequestMapping("/api/notes")
-public class Controller {
+public class NotesController {
 	
 	@Autowired
 	private NoteService noteService;
