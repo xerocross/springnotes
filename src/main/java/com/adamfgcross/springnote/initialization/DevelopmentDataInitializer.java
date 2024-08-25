@@ -27,6 +27,7 @@ public class DevelopmentDataInitializer implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		User devuser = new User();
 		devuser.setUsername("adam");
+		devuser.setEnabled(true);
 		devuser.setPassword(passwordEncoder.encode("guest"));
 		userRepository.save(devuser);
 	}
