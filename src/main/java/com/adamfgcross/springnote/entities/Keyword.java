@@ -1,9 +1,15 @@
 package com.adamfgcross.springnote.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Keyword {
@@ -17,6 +23,9 @@ public class Keyword {
 	private Long id;
 	
 	private String keyword;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	public String getKeyword() {
@@ -30,5 +39,15 @@ public class Keyword {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@ManyToMany(mappedBy = "keywords")
+	private Set<Note> notes = new HashSet<>();
+
+	public Set<Note> getNotes() {
+		return notes;
+	}
+	public void setNotes(Set<Note> notes) {
+		this.notes = notes;
 	}
 }

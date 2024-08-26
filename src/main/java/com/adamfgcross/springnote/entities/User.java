@@ -2,12 +2,14 @@ package com.adamfgcross.springnote.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -59,4 +61,27 @@ public class User {
     	authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
     	return authorities;
 	}
+	
+	@OneToMany(mappedBy = "user")
+	private List<Note> notes = new ArrayList<>();
+
+	public List<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<Note> notes) {
+		this.notes = notes;
+	}
+	
+	@OneToMany(mappedBy = "user")
+	private List<Keyword> keywords = new ArrayList<>();
+
+	public List<Keyword> getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(List<Keyword> keywords) {
+		this.keywords = keywords;
+	}
+	
 }
