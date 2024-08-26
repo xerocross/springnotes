@@ -1,6 +1,14 @@
 spring:
   profiles: 
     active: dev
+  logging:
+    level:
+      root: DEBUG
+      org:
+        hibernate: DEBUG
+        springframework:
+          orm:
+            jpa: DEBUG
   h2:
     console:
       enabled: true
