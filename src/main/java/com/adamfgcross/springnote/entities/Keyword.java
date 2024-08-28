@@ -14,6 +14,9 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Keyword {
 	
+	public Keyword() {
+	}
+	
 	public Keyword(String keyword) {
 		this.keyword = keyword;
 	}
