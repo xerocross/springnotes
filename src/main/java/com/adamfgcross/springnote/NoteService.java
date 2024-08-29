@@ -12,6 +12,7 @@ import com.adamfgcross.springnote.entities.Note;
 import com.adamfgcross.springnote.entities.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -51,6 +52,10 @@ public class NoteService {
         return noteRepository.findById(id);
     }
 
+	public List<Note> getNotesByKeyword(List<String> keywords) {
+		return noteRepository.findNotesByAllKeywords(keywords, keywords.size());
+	}
+	
 	private Set<Keyword> parseKeywords(String textContent) {
 		String hashtagPattern = "#\\w+";
 		Pattern pattern = Pattern.compile(hashtagPattern);
@@ -63,4 +68,5 @@ public class NoteService {
         }
 		return keywords;
 	}
+	
 }
