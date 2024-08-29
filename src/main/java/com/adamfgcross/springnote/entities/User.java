@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -83,5 +84,19 @@ public class User {
 	public void setKeywords(List<Keyword> keywords) {
 		this.keywords = keywords;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true; // Check if they are the same instance
+        if (o == null || getClass() != o.getClass()) return false; // Check if o is null or not of the same class
+        User user = (User) o; // Cast o to User and compare relevant fields
+        return Objects.equals(id, user.id) &&
+               Objects.equals(username, user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username); // Generate hash code based on relevant fields
+    }
 	
 }

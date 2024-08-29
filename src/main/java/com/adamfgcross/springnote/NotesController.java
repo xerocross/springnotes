@@ -1,6 +1,8 @@
 package com.adamfgcross.springnote;
 
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ import com.adamfgcross.springnote.entities.User;
 @RequestMapping("/api/notes")
 public class NotesController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(NotesController.class);
+	
 	@Autowired
 	private NoteService noteService;
 
@@ -31,11 +35,20 @@ public class NotesController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<NoteDTO> getNoteById(@PathVariable Long id) {
-		Optional<Note> note = noteService.getNoteById(id);
-		return note.map(NoteDTO::new)
-			.map(ResponseEntity::ok)
-			.orElseGet(() -> ResponseEntity.notFound().build());
+	public ResponseEntity<?> getNoteById(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+									@PathVariable Long id) {
+		User user = customUserDetails.getUser();
+		Optional<Note> noteOptional = noteService.getNoteById(id);
+		return noteOptional.map(note -> {
+			if (note.getUser().equals(user)) {
+				return ResponseEntity.ok(new NoteDTO(note));
+			} else {
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have permission to access this note.");
+			}
+		})
+		.orElseGet(() -> 
+			ResponseEntity.notFound().build()
+		);
 	}
 	
 	@GetMapping("/search")
