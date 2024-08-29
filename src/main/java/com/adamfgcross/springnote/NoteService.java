@@ -52,8 +52,8 @@ public class NoteService {
         return noteRepository.findById(id);
     }
 
-	public List<Note> getNotesByKeyword(List<String> keywords) {
-		return noteRepository.findNotesByAllKeywords(keywords, keywords.size());
+	public List<Note> getNotesByKeyword(User user, List<String> keywords) {
+		return noteRepository.findNotesByAllKeywords(user, keywords, keywords.size());
 	}
 	
 	private Set<Keyword> parseKeywords(String textContent) {

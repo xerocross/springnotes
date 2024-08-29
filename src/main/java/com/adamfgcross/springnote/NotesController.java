@@ -39,9 +39,11 @@ public class NotesController {
 	}
 	
 	@GetMapping("/search")
-    public ResponseEntity<List<NoteDTO>> searchNotes(@RequestParam("keywords") List<String> keywords) {
+    public ResponseEntity<List<NoteDTO>> searchNotes(@AuthenticationPrincipal CustomUserDetails customUserDetails, 
+    												@RequestParam("keywords") List<String> keywords) {
 		
-        List<Note> notes = noteService.getNotesByKeyword(keywords);
+		User user = customUserDetails.getUser();
+		List<Note> notes = noteService.getNotesByKeyword(user, keywords);
         List<NoteDTO> noteDTOs = notes.stream()
         		.map(NoteDTO::new)
         		.toList();
