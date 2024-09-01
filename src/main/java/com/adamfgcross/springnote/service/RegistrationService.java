@@ -1,12 +1,12 @@
-package com.adamfgcross.springnote.auth;
+package com.adamfgcross.springnote.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.adamfgcross.springnote.UserRegistrationInformation;
-import com.adamfgcross.springnote.data.UserRepository;
-import com.adamfgcross.springnote.entities.User;
+import com.adamfgcross.springnote.domain.User;
+import com.adamfgcross.springnote.dto.UserRegistrationInformation;
+import com.adamfgcross.springnote.repository.UserRepository;
 
 @Service
 public class RegistrationService {

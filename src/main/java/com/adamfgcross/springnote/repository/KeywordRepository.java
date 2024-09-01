@@ -1,8 +1,8 @@
-package com.adamfgcross.springnote.data;
+package com.adamfgcross.springnote.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.adamfgcross.springnote.entities.Keyword;
+import com.adamfgcross.springnote.domain.Keyword;
 
 public interface KeywordRepository extends JpaRepository<Keyword, Long> {
 

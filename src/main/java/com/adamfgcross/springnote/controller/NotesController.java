@@ -1,4 +1,4 @@
-package com.adamfgcross.springnote;
+package com.adamfgcross.springnote.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.adamfgcross.springnote.auth.CustomUserDetails;
-import com.adamfgcross.springnote.data.NoteDTO;
-import com.adamfgcross.springnote.entities.Note;
-import com.adamfgcross.springnote.entities.User;
+import com.adamfgcross.springnote.domain.Note;
+import com.adamfgcross.springnote.domain.User;
+import com.adamfgcross.springnote.dto.NoteDTO;
+import com.adamfgcross.springnote.dto.NoteInput;
+import com.adamfgcross.springnote.service.NoteService;
 
 @RestController
 @RequestMapping("/api/notes")
@@ -71,25 +73,4 @@ public class NotesController {
         		.toList();
         return new ResponseEntity<>(noteDTOs, HttpStatus.OK);
     }
-}
-
-class NoteInput {
-    private String text;
-    private String password;
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
 }

@@ -1,6 +1,8 @@
-package com.adamfgcross.springnote.auth;
+package com.adamfgcross.springnote.service;
 
 import org.springframework.stereotype.Service;
+
+import com.adamfgcross.springnote.auth.JwtUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;

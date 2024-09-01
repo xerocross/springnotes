@@ -66,7 +66,7 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes()); // Convert your secret key to the appropriate format
     }
 
-    protected String generateToken(Authentication authentication) {
+    public String generateToken(Authentication authentication) {
         // Typically, you would include the user's roles or other details in the token
         return Jwts.builder()
                 .setSubject(authentication.getName()) // The subject is typically the username

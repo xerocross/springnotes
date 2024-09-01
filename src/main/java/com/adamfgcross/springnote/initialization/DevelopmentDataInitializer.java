@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.adamfgcross.springnote.data.UserRepository;
-import com.adamfgcross.springnote.entities.User;
+import com.adamfgcross.springnote.domain.User;
+import com.adamfgcross.springnote.repository.UserRepository;
 
 @Component
 @Profile("dev")

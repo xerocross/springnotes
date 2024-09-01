@@ -1,4 +1,4 @@
-package com.adamfgcross.springnote;
+package com.adamfgcross.springnote.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.adamfgcross.springnote.auth.RegistrationService;
-import com.adamfgcross.springnote.entities.User;
+
+import com.adamfgcross.springnote.domain.User;
+import com.adamfgcross.springnote.dto.UserRegistrationInformation;
+import com.adamfgcross.springnote.service.RegistrationService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

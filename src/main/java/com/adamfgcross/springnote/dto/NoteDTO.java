@@ -1,9 +1,9 @@
-package com.adamfgcross.springnote.data;
+package com.adamfgcross.springnote.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.adamfgcross.springnote.entities.Note;
+import com.adamfgcross.springnote.domain.Note;
 
 public class NoteDTO {
 	public NoteDTO (Long id, String user, String text)

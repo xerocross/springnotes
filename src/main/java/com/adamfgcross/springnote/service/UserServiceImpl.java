@@ -1,4 +1,4 @@
-package com.adamfgcross.springnote.auth;
+package com.adamfgcross.springnote.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,8 +6,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.adamfgcross.springnote.data.UserRepository;
-import com.adamfgcross.springnote.entities.User;
+import com.adamfgcross.springnote.auth.CustomUserDetails;
+import com.adamfgcross.springnote.domain.User;
+import com.adamfgcross.springnote.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserDetailsService {

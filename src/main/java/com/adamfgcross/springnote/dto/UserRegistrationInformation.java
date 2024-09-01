@@ -1,4 +1,4 @@
-package com.adamfgcross.springnote;
+package com.adamfgcross.springnote.dto;
 
 public class UserRegistrationInformation {
 

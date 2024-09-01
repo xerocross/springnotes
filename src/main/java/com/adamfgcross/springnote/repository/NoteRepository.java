@@ -1,13 +1,13 @@
-package com.adamfgcross.springnote.data;
-
-import com.adamfgcross.springnote.entities.Note;
-import com.adamfgcross.springnote.entities.User;
+package com.adamfgcross.springnote.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.adamfgcross.springnote.domain.Note;
+import com.adamfgcross.springnote.domain.User;
 
 public interface NoteRepository extends JpaRepository<Note, Long> {
 

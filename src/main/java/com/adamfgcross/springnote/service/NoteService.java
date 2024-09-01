@@ -1,15 +1,16 @@
-package com.adamfgcross.springnote;
+package com.adamfgcross.springnote.service;
 
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.adamfgcross.springnote.data.KeywordRepository;
-import com.adamfgcross.springnote.data.NoteRepository;
-import com.adamfgcross.springnote.entities.Keyword;
-import com.adamfgcross.springnote.entities.Note;
-import com.adamfgcross.springnote.entities.User;
+import com.adamfgcross.springnote.domain.Keyword;
+import com.adamfgcross.springnote.domain.Note;
+import com.adamfgcross.springnote.domain.User;
+import com.adamfgcross.springnote.dto.NoteInput;
+import com.adamfgcross.springnote.repository.KeywordRepository;
+import com.adamfgcross.springnote.repository.NoteRepository;
 
 import java.util.HashSet;
 import java.util.List;

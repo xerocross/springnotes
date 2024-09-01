@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.adamfgcross.springnote.entities.User;
+import com.adamfgcross.springnote.domain.User;
 
 public class CustomUserDetails implements UserDetails {
 

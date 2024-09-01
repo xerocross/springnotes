@@ -1,14 +1,11 @@
-package com.adamfgcross.springnote.encryption;
-
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
+package com.adamfgcross.springnote.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.stereotype.Service;
 
-import com.adamfgcross.springnote.entities.Note;
+import com.adamfgcross.springnote.domain.Note;
 
 @Service
 public class EncryptionService {
