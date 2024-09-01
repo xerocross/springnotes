@@ -33,6 +33,16 @@ public class User {
 	
 	private boolean enabled;
 	
+	private String encryptionSalt;
+	
+	public String getEncryptionSalt() {
+		return encryptionSalt;
+	}
+
+	public void setEncryptionSalt(String encryptionSalt) {
+		this.encryptionSalt = encryptionSalt;
+	}
+
 	public boolean isEnabled() {
 		return enabled;
 	}

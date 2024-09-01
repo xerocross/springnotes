@@ -29,6 +29,11 @@ public class NoteService {
 	@Autowired
 	private KeywordRepository keywordRepository;
 	
+	public Note createSecureNote(User user, NoteInput noteInput) {
+		return null;
+	}
+	
+	
 	public Note createNote(User user, NoteInput noteInput) {
 		Note note = new Note();
 		note.setUser(user);

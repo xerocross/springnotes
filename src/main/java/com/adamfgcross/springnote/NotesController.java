@@ -34,6 +34,15 @@ public class NotesController {
 		return ResponseEntity.ok(noteDTO);
 	}
 	
+	@PostMapping("/secure")
+	public ResponseEntity<NoteDTO> createSecureNote(@AuthenticationPrincipal CustomUserDetails customUserDetails, 
+													@RequestBody NoteInput noteInput) {
+		User user = customUserDetails.getUser();
+		Note note = noteService.createNote(user, noteInput);
+		NoteDTO noteDTO = new NoteDTO(note);
+		return ResponseEntity.ok(noteDTO);
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getNoteById(@AuthenticationPrincipal CustomUserDetails customUserDetails,
 									@PathVariable Long id) {
@@ -66,6 +75,15 @@ public class NotesController {
 
 class NoteInput {
     private String text;
+    private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getText() {
 		return text;

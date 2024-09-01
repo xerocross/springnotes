@@ -3,6 +3,7 @@ package com.adamfgcross.springnote.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -29,6 +30,28 @@ public class Note {
 	@Column(nullable = true)
 	private String text;
 	
+	@Lob
+	private byte[] encryptedData;
+	
+	public byte[] getEncryptedData() {
+		return encryptedData;
+	}
+
+	public void setEncryptedData(byte[] encryptedData) {
+		this.encryptedData = encryptedData;
+	}
+	
+	private String encryptionSalt;
+	
+
+	public String getEncryptionSalt() {
+		return encryptionSalt;
+	}
+
+	public void setEncryptionSalt(String encryptionSalt) {
+		this.encryptionSalt = encryptionSalt;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
