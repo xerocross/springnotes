@@ -1,7 +1,11 @@
 package com.adamfgcross.springnote.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
@@ -9,8 +13,10 @@ import jakarta.persistence.GenerationType;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -95,6 +101,20 @@ public class User {
 		this.keywords = keywords;
 	}
 	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_roles", 
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "role_id"))
+	public Set<Role> roles = new HashSet<>();
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true; // Check if they are the same instance
