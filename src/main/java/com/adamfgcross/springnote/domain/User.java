@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -74,8 +75,9 @@ public class User {
 	}
 	
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Collection<GrantedAuthority> authorities = new ArrayList<>();
-    	authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		Collection<GrantedAuthority> authorities = this.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
+				.collect(Collectors.toList());
     	return authorities;
 	}
 	
@@ -101,7 +103,7 @@ public class User {
 		this.keywords = keywords;
 	}
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", 
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
